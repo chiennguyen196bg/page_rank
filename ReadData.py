@@ -129,7 +129,7 @@ class ReadPageLinksFile(ReadData):
 
 
 class ReadPageFile(ReadData):
-    def __init__(self, input_path, output_path='./page-result.txt'):
+    def __init__(self, input_path, output_path='./page-title-result.txt'):
         ReadData.__init__(self, input_path, output_path)
 
     def _extract_data(self):

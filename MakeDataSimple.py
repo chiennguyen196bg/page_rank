@@ -2,7 +2,8 @@ import csv
 
 
 class MakeDataSimple:
-    def __init__(self, page_title_file, page_links_file, result_path='./result.txt'):
+    def __init__(self, page_title_file='./page-title-result.txt', page_links_file='page-links-result.txt',
+                 result_path='./simple-links.txt'):
         self.__page_title_file = page_title_file
         self.__page_links_file = page_links_file
         self.__result_path = result_path
@@ -56,5 +57,5 @@ class MakeDataSimple:
 
 
 if __name__ == "__main__":
-    make_simple_page_links = MakeDataSimple('./page-result.txt', './page-links-result.txt', './simple-links.txt')
+    make_simple_page_links = MakeDataSimple()
     make_simple_page_links.start()
