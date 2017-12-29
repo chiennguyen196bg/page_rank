@@ -6,7 +6,8 @@ import math
 
 class PageRank:
 
-    def __init__(self, n_page, n_thread=1, max_iterator=1000, epsilon=1e-9, beta=0.85, page_links_file='./simple-links.txt'):
+    def __init__(self, n_page, n_thread=1, max_iterator=1000, epsilon=1e-9, beta=0.85,
+                 page_links_file='./simple-links.txt'):
         self.__page_links_file = page_links_file
         self.__n_thread = n_thread
         self.__max_iterator = max_iterator
@@ -21,7 +22,7 @@ class PageRank:
         with open(self.__page_links_file, mode='r', encoding='utf-8', newline='') as csvfile:
             reader = csv.reader(csvfile, delimiter=' ')
             for index, row in enumerate(reader):
-                print(index)
+                if index % 10000 == 0: print(index)
                 source_id = int(row[0])
                 destination_ids = list(map(int, row[1:]))
                 self.__page_links_dict[source_id] = destination_ids

@@ -22,11 +22,15 @@ def load_page_rank_file(path):
     return page_rank_list
 
 
-if __name__ == '__main__':
-    page_title_list = load_page_title_file('./page-result.txt')
+def write_sorted_page_title_by_page_rank():
+    page_title_list = load_page_title_file('./page-title-result.txt')
     page_rank_list = load_page_rank_file('./page-rank-result.txt')
     sorted_list = sorted(list(zip(page_rank_list, page_title_list)), key=lambda x: x[0], reverse=True)
     with open('./sorted-page-title-by-page-rank.txt', mode='w', encoding='utf-8', newline='') as f:
         writer = csv.writer(f, delimiter=' ')
         for page_rank, page_title in sorted_list:
             writer.writerow([page_rank, page_title])
+
+
+if __name__ == '__main__':
+    write_sorted_page_title_by_page_rank()
