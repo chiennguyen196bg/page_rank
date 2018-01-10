@@ -11,6 +11,7 @@ class ReadData:
         self._csv_write = None
         self._index = None
         self._current_line = None
+        self.__total_field = 0
 
     def read_field(self, field_type, can_be_null=False):
         if can_be_null and self._check_null():
@@ -101,6 +102,9 @@ class ReadData:
     def _extract_data(self):
         pass
 
+    def get_total_field(self):
+        return self.__total_field
+
 
 class ReadPageLinksFile(ReadData):
     def __init__(self, input_path, output_path='./page-links-result.txt'):
@@ -125,10 +129,11 @@ class ReadPageLinksFile(ReadData):
 
             # print(pl_from, pl_namespace, pl_title, pl_from_namespace)
             if pl_namespace == 0 and pl_from_namespace == 0:
+                self.__total_field += 1
                 self._write_2_file(pl_from, pl_title)
 
 
-class ReadPageFile(ReadData):
+class ReadPageTitleFile(ReadData):
     def __init__(self, input_path, output_path='./page-title-result.txt'):
         ReadData.__init__(self, input_path, output_path)
 
@@ -156,12 +161,13 @@ class ReadPageFile(ReadData):
             self._next_char()
 
             if page_namespace == 0:
+                self.__total_field += 1
                 self._write_2_file(page_id, page_title)
 
 
 if __name__ == '__main__':
     page_links_reader = ReadPageLinksFile('./viwiki-20170901-pagelinks.sql')
-    page_reader = ReadPageFile('./viwiki-20170901-page.sql')
+    page_reader = ReadPageTitleFile('./viwiki-20170901-page.sql')
     print("Start Page Reader")
     page_reader.start()
     print("Done Page Reader!")
